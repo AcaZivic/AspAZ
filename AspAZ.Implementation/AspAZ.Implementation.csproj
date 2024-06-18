@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.1.35" />
+    <PackageReference Include="FluentValidation" Version="11.9.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AspAZ.Application\AspAZ.Application.csproj" />
+    <ProjectReference Include="..\AspAZ.DataAccess\AspAZ.DataAccess.csproj" />
+    <ProjectReference Include="C:\Users\acazi\OneDrive\Desktop\Skola\Skola ICT\9. trimestar 2023-2024\ASP.NET\Projekat\AspAZ\AspAZ.Domain\AspAZ.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="UseCases\Commands\Categories\" />
+    <Folder Include="UseCases\Commands\Posts\" />
+    <Folder Include="UseCases\Commands\Users\" />
+  </ItemGroup>
+
+
+</Project>
