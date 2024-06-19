@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace AspAZ.Application.DataTransfer
 {
-    public class ManufacturerSearchDTO : PagedSearch
+    public class GroupSearchDTO : PagedSearch
     {
         public string? Name { get; set; }
-        public int? MinNumberOfProducts { get; set; }
+        public int? MinNumberOfEmployees { get; set; }
     }
 }

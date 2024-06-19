@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AspAZ.Application.UseCases.Queries
 {
-    public interface IGetManufacturerQuery : IQuery<ManufacturerSearchDTO, PagedResponse<ManufacturerDTO>>
+    public interface IGetGroupQuery : IQuery<GroupSearchDTO, PagedResponse<GroupDTO>>
     {
     }
 }

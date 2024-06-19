@@ -6,7 +6,7 @@ using System.Text;
 
 namespace AspAZ.Application
 {
-    public interface IQuery<TResult, TSearch> : IUseCase
+    public interface IQuery<TSearch, TResult> : IUseCase
         where TResult : class
     {
         TResult Execute(TSearch search);

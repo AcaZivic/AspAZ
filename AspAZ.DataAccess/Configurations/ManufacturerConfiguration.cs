@@ -15,6 +15,10 @@ namespace AspAZ.DataAccess.Configurations
     {
         public void Configure(EntityTypeBuilder<Manufacturer> builder)
         {
+
+            builder.Property(x => x.Name).HasMaxLength(64).IsRequired();
+            builder.HasIndex(x => x.Name).IsUnique();
+
            
             builder.Property(x => x.Description).HasMaxLength(120);
 

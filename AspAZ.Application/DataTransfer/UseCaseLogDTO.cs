@@ -1,10 +1,13 @@
-﻿using System;
+﻿using AspAZ.DataTransfer;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace AspAZ.Domain
+namespace AspAZ.Application.DataTransfer
 {
-    public class UseCaseLog :Entity
+    public class UseCaseLogDTO : BaseDTO
     {
         public string UseCaseName { get; set; }
         public string Username { get; set; }

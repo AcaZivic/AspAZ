@@ -6,10 +6,10 @@ namespace AspAZ.Application
 {
     public interface IUseCaseLogger
     {
-        void Log(UseCaseLog log);
+        void Log(UseCaseLogDTO log);
     }
 
-    public class UseCaseLog
+    public class UseCaseLogDTO
     {
         public string Username { get; set; }
         public string UseCaseName { get; set; }

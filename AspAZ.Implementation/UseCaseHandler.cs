@@ -32,7 +32,7 @@ namespace AspAZ.Implementation
             Console.WriteLine($"UseCase: {command.Name}, {stopwatch.ElapsedMilliseconds} ms");
         }
 
-        public TResult HandleQuery<TResult, TSearch>(IQuery<TResult, TSearch> query, TSearch search)
+        public TResult HandleQuery<TResult, TSearch>(IQuery<TSearch, TResult> query, TSearch search)
             where TResult : class
 
         {
@@ -57,7 +57,7 @@ namespace AspAZ.Implementation
                 throw new UnauthorizedAccessException();
             }
 
-            var log = new UseCaseLog
+            var log = new UseCaseLogDTO
             {
                 UseCaseData = data,
                 UseCaseName = useCase.Name,

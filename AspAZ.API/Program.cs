@@ -1,6 +1,10 @@
+using AspAZ.Api.Core;
 using AspAZ.API.Core;
 using AspAZ.Application;
 using AspAZ.DataAccess;
+using AspAZ.Implementation.Commands;
+using AspAZ.Implementation.Profiles;
+using AspAZ.Implementation.Validators;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +13,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddTransient<GameKingdomContext>();
+builder.Services.AddTransient<ManufacturerValidator>();
+builder.Services.AddTransient<GroupUpdateValidator>();
+
+builder.Services.AddTransient<GroupValidator>();
+//builder.Services.AddAutoMapper(builder.GetType().Assembly);
+
+
+
+builder.Services.AddUseCases();
+
 builder.Services.AddTransient<IExceptionLogger, DbExceptionLogger>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

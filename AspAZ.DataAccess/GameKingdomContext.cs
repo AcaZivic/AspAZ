@@ -26,8 +26,9 @@ namespace AspAZ.DataAccess
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(_connectionString);
-            base.OnConfiguring(optionsBuilder);
+            //base.OnConfiguring(optionsBuilder);
+            optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-ACAZ\SQLEXPRESS;Initial Catalog=AspProjectGK;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
+            
 
         }
 
@@ -111,6 +112,8 @@ namespace AspAZ.DataAccess
 
         public DbSet<Cart> Carts { get; set; }
         public DbSet<ErrorLog> ErrorLogs { get; set; }
+        public DbSet<UserUseCase> UserUseCases { get; set; }
+        public DbSet<UseCaseLog> UseCaseLogs { get; set; }
 
     }
 }

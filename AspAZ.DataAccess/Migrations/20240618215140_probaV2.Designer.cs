@@ -4,6 +4,7 @@ using AspAZ.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AspAZ.DataAccess.Migrations
 {
     [DbContext(typeof(GameKingdomContext))]
-    partial class GameKingdomContextModelSnapshot : ModelSnapshot
+    [Migration("20240618215140_probaV2")]
+    partial class probaV2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -238,7 +240,7 @@ namespace AspAZ.DataAccess.Migrations
                     b.Property<Guid>("ErrorId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
-                        .HasDefaultValue(new Guid("c6b03d5a-9dbf-4041-a089-b512b880e82c"));
+                        .HasDefaultValue(new Guid("b603c346-e76e-4f08-b9f1-8088a6f274dd"));
 
                     b.Property<string>("Message")
                         .IsRequired()
@@ -645,50 +647,7 @@ namespace AspAZ.DataAccess.Migrations
                     b.ToTable("ShopStorage");
                 });
 
-            modelBuilder.Entity("AspAZ.Domain.UseCaseLog", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("ExecutedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UseCaseData")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UseCaseName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("isActive")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("UseCaseLogs");
-                });
-
-            modelBuilder.Entity("AspAZ.Domain.UserUseCase", b =>
+            modelBuilder.Entity("AspYt.Domain.UserUseCase", b =>
                 {
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -698,7 +657,7 @@ namespace AspAZ.DataAccess.Migrations
 
                     b.HasKey("UserId", "UseCaseId");
 
-                    b.ToTable("UserUseCases");
+                    b.ToTable("UserUseCase");
                 });
 
             modelBuilder.Entity("AspAZ.Domain.Cart", b =>
@@ -861,7 +820,7 @@ namespace AspAZ.DataAccess.Migrations
                     b.Navigation("RetailShop");
                 });
 
-            modelBuilder.Entity("AspAZ.Domain.UserUseCase", b =>
+            modelBuilder.Entity("AspYt.Domain.UserUseCase", b =>
                 {
                     b.HasOne("AspAZ.Domain.Employee", "User")
                         .WithMany("UseCases")

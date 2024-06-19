@@ -9,6 +9,7 @@ using AspAZ.Application.DataTransfer;
 using AspAZ.Application.UseCases.Queries;
 using AspAZ.Application;
 using AspAZ.Application.UseCases.Commands;
+using AutoMapper;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -16,12 +17,13 @@ namespace AspAZ.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ManufacturersController : ControllerBase
+    public class GroupsController : ControllerBase
     {
         private readonly IApplicationActor _actor;
         private readonly UseCaseExecutor _executor;
+        
 
-        public ManufacturersController(UseCaseExecutor executor, IApplicationActor actor)
+        public GroupsController(UseCaseExecutor executor, IApplicationActor actor)
         {
             _executor = executor;
             _actor = actor;
@@ -37,14 +39,14 @@ namespace AspAZ.API.Controllers
             return Ok(_executor.ExecuteQuery(query,search));
         }
 
-     
+
 
         // POST api/<ManufacturerController>
         [HttpPost]
-        public IActionResult Post([FromBody] ManufacturerDTO dto, [FromServices] ICreateManufacturerCommand command)
+        public IActionResult Post([FromBody] GroupDTO dto, [FromServices] ICreateGroupCommand command)
         {
 
-         
+
             _executor.ExecuteCommand(command, dto); 
 
             return StatusCode(StatusCodes.Status201Created);
@@ -54,7 +56,7 @@ namespace AspAZ.API.Controllers
 
         //// PUT api/<ManufacturerController>/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] ManufacturerUpdateDTO dto, [FromServices] IUpdateManufacturerCommand command)
+        public IActionResult Put(int id, [FromBody] GroupUpdateDTO dto, [FromServices] IUpdateGroupCommand command)
         {
 
             dto.Id = id;
@@ -73,7 +75,7 @@ namespace AspAZ.API.Controllers
 
         //// DELETE api/<ManufacturerController>/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id, [FromServices] IDeleteManufacturerCommand command)
+        public IActionResult Delete(int id, [FromServices] IDeleteGroupCommand command)
         {
 
             _executor.ExecuteCommand(command, id);
