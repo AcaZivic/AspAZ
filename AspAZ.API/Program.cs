@@ -13,10 +13,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddTransient<GameKingdomContext>();
-builder.Services.AddTransient<ManufacturerValidator>();
-builder.Services.AddTransient<GroupUpdateValidator>();
 
-builder.Services.AddTransient<GroupValidator>();
+
 //builder.Services.AddAutoMapper(builder.GetType().Assembly);
 
 

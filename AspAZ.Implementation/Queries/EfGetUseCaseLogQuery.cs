@@ -22,7 +22,7 @@ namespace AspAZ.Implementation.Queries
             _context = context;
         }
 
-        public int Id => 101;
+        public int Id => 102;
 
         public string Name => "UseCaseLog Search";
 

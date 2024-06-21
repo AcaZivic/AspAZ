@@ -4,6 +4,7 @@ using AspAZ.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AspAZ.DataAccess.Migrations
 {
     [DbContext(typeof(GameKingdomContext))]
-    partial class GameKingdomContextModelSnapshot : ModelSnapshot
+    [Migration("20240621014324_fixing-issues1.2")]
+    partial class fixingissues12
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -236,7 +238,7 @@ namespace AspAZ.DataAccess.Migrations
                     b.Property<Guid>("ErrorId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
-                        .HasDefaultValue(new Guid("b8b86aa8-ec78-4552-aa06-836662d4bb66"));
+                        .HasDefaultValue(new Guid("c6dbe125-0f71-482b-9a4a-4140e6def16e"));
 
                     b.Property<string>("Message")
                         .IsRequired()
@@ -358,7 +360,7 @@ namespace AspAZ.DataAccess.Migrations
                     b.Property<DateTime>("DateFrom")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DateTo")
+                    b.Property<DateTime>("DateTo")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DeletedAt")

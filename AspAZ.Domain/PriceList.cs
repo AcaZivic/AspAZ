@@ -10,7 +10,7 @@ namespace AspAZ.Domain
     {
         public double Price { get; set; }
         public DateTime DateFrom { get; set; }
-        public DateTime DateTo { get; set; }
+        public DateTime? DateTo { get; set; }
 
         public virtual Product? Product { get; set; }
 

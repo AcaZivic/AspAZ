@@ -17,23 +17,23 @@ namespace AspAZ.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class GroupsController : ControllerBase
+    public class PropertiesController : ControllerBase
     {
         private readonly IApplicationActor _actor;
         private readonly UseCaseExecutor _executor;
         
 
-        public GroupsController(UseCaseExecutor executor, IApplicationActor actor)
+        public PropertiesController(UseCaseExecutor executor, IApplicationActor actor)
         {
             _executor = executor;
             _actor = actor;
         }
 
-        // GET: api/<ManufacturerController>
+        // GET: api/<CategoriesController>
         [HttpGet]
         public IActionResult Get(
-            [FromQuery] GroupSearchDTO search,
-            [FromServices] IGetGroupQuery query)
+            [FromQuery] PropertySearchDTO search,
+            [FromServices] IGetPropertyQuery query)
         {
             //var manufacturers = _gameContext.Manufacturers.ToList();
             return Ok(_executor.ExecuteQuery(query,search));
@@ -43,7 +43,7 @@ namespace AspAZ.API.Controllers
 
         // POST api/<ManufacturerController>
         [HttpPost]
-        public IActionResult Post([FromBody] GroupDTO dto, [FromServices] ICreateGroupCommand command)
+        public IActionResult Post([FromBody] PropertyDTO dto, [FromServices] ICreatePropertyCommand command)
         {
 
 
@@ -56,7 +56,7 @@ namespace AspAZ.API.Controllers
 
         //// PUT api/<ManufacturerController>/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] GroupUpdateDTO dto, [FromServices] IUpdateGroupCommand command)
+        public IActionResult Put(int id, [FromBody] PropertyUpdateDTO dto, [FromServices] IUpdatePropertyCommand command)
         {
 
             dto.Id = id;
@@ -75,7 +75,7 @@ namespace AspAZ.API.Controllers
 
         //// DELETE api/<ManufacturerController>/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id, [FromServices] IDeleteGroupCommand command)
+        public IActionResult Delete(int id, [FromServices] IDeletePropertyCommand command)
         {
 
             _executor.ExecuteCommand(command, id);

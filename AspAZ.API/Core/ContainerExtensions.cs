@@ -28,14 +28,55 @@ namespace AspAZ.API.Core
             services.AddTransient<IDeleteManufacturerCommand, EfDeleteManufacturerCommand>();
             services.AddTransient<IUpdateManufacturerCommand, EfUpdateManufacturerCommand>();
             services.AddTransient<IDeleteGroupCommand, EfDeleteGroupCommand>();
+            services.AddTransient<IDeletePropertyCommand, EfDeletePropertyCommand>();
+            services.AddTransient<ICreateCategoryCommand, EfCreateCategoryCommand>();
+            services.AddTransient<IUpdateCategoryCommand, EfUpdateCategoryCommand>();
+            services.AddTransient<IDeleteCategoryCommand, EfDeleteCategoryCommand>();
+            services.AddTransient<IGetCategoryQuery, EfGetCategoryQuery>();
+            services.AddTransient<ICreatePriceListCommand, EfCreatePriceListCommand>();
+            services.AddTransient<IUpdatePriceListCommand, EfUpdatePriceListCommand>();
+            services.AddTransient<IGetPriceListQuery, EfGetPriceListQuery>();
+            services.AddTransient<IDeletePriceListCommand, EfDeletePriceListCommand>();
+
+
+
+
             services.AddTransient<IUpdateGroupCommand, EfUpdateGroupCommand>();
             services.AddTransient<IUseCaseLogger, EfUseCaseLogger>();
             services.AddTransient<IGetUseCaseLogQuery, EfGetUseCaseLogQuery>();
+            services.AddTransient<IGetGroupQuery, EfGetGroupsQuery>();
+            services.AddTransient<IGetPropertyQuery, EfGetPropertyQuery>();
+            services.AddTransient<IUpdatePropertyCommand, EfUpdatePropertyCommand>();
+
+
+            services.AddTransient<ManufacturerValidator>();
+            services.AddTransient<GroupUpdateValidator>();
+            services.AddTransient<GroupValidator>();
+            services.AddTransient<PropertyValidator>();
+            services.AddTransient<PropertyUpdateValidator>();
+            services.AddTransient<CategoryValidator>();
+            services.AddTransient<UpdateCategoryValidator>();
+            services.AddTransient<PriceListValidator>();
+            services.AddTransient<UpdatePriceListValidator>();
+
+
+
+            services.AddTransient<ICreatePropertyCommand, EfCreatePropertyCommand>();
+
             services.AddAutoMapper(services.GetType().Assembly);
+            services.AddAutoMapper(typeof(EfGetGroupsQuery).Assembly);
+            services.AddAutoMapper(typeof(EfCreatePropertyCommand).Assembly);
+            //services.AddAutoMapper(typeof(EfCreatePropertyCommand).Assembly);
+
+
             services.AddTransient<ICreateGroupCommand, EfCreateGroupCommand>();
             var mapperConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new GroupProfile());
+                mc.AddProfile(new PropertyProfile());
+                mc.AddProfile(new CategoryProfile());
+                mc.AddProfile(new PriceListProfile());
+
             });
 
             IMapper mapper = mapperConfig.CreateMapper();

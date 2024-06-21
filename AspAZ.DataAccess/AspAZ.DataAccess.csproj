@@ -20,11 +20,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AspAZ.Domain\AspAZ.Domain.csproj" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Migrations\" />
+    <ProjectReference Include="..\AspAZ.Domain\AspAZ.Domain.csproj" />
   </ItemGroup>
 
 </Project>

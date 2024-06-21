@@ -17,13 +17,13 @@ namespace AspAZ.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class GroupsController : ControllerBase
+    public class ProductController : ControllerBase
     {
         private readonly IApplicationActor _actor;
         private readonly UseCaseExecutor _executor;
         
 
-        public GroupsController(UseCaseExecutor executor, IApplicationActor actor)
+        public ProductController(UseCaseExecutor executor, IApplicationActor actor)
         {
             _executor = executor;
             _actor = actor;

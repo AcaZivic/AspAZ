@@ -43,9 +43,12 @@ namespace AspAZ.API.Core
                     return;
                 }
 
-                if (exception is EntityNotFoundException)
+                if (exception is EntityNotFoundException ee)
                 {
                     httpContext.Response.StatusCode = 404;
+                    var body = new { error = ee.Message };
+                    await httpContext.Response.WriteAsJsonAsync(body);
+
                     return;
                 }
 

@@ -16,35 +16,34 @@ using System.Threading.Tasks;
 
 namespace AspAZ.Implementation.Commands
 {
-    public class EfUpdateGroupCommand : IUpdateGroupCommand
+    public class EfUpdatePropertyCommand : IUpdatePropertyCommand
     {
         private readonly GameKingdomContext _context;
-        private readonly GroupUpdateValidator _validator;
+        private readonly PropertyUpdateValidator _validator;
         private readonly IMapper _mapper;
 
-        public EfUpdateGroupCommand(GameKingdomContext context,GroupUpdateValidator guv, IMapper mapper)
+        public EfUpdatePropertyCommand(GameKingdomContext context, PropertyUpdateValidator puv, IMapper mapper)
         {
             _context = context;
-            _validator = guv;
+            _validator = puv;
             _mapper = mapper;
         }
 
-        public int Id => 6;
+        public int Id => 8;
 
-        public string Name => "Updating group";
+        public string Name => "Updating property";
 
-        public void Execute(GroupUpdateDTO data)
+        public void Execute(PropertyUpdateDTO data)
         {
-            var group = _context.GroupEmps.Find(data.Id);
+            var prop = _context.Properties.Find(data.Id);
 
-            if (group == null)
+            if (prop == null)
             {
-                throw new EntityNotFoundException(typeof(GroupEmp).ToString(), data.Id);
+                throw new EntityNotFoundException(typeof(Property).ToString(), data.Id);
             }
             _validator.ValidateAndThrow(data); //ValidationException
 
-
-            _mapper.Map(data, group);
+            _mapper.Map(data,prop);
 
 
             _context.SaveChanges();

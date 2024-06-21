@@ -4,6 +4,7 @@ using AspAZ.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AspAZ.DataAccess.Migrations
 {
     [DbContext(typeof(GameKingdomContext))]
-    partial class GameKingdomContextModelSnapshot : ModelSnapshot
+    [Migration("20240620191712_asd")]
+    partial class asd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -102,6 +104,7 @@ namespace AspAZ.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("ParentId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<bool>("isActive")
@@ -236,7 +239,7 @@ namespace AspAZ.DataAccess.Migrations
                     b.Property<Guid>("ErrorId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
-                        .HasDefaultValue(new Guid("b8b86aa8-ec78-4552-aa06-836662d4bb66"));
+                        .HasDefaultValue(new Guid("56752990-91e8-43af-ab01-bdeaeb4186b3"));
 
                     b.Property<string>("Message")
                         .IsRequired()
@@ -358,7 +361,7 @@ namespace AspAZ.DataAccess.Migrations
                     b.Property<DateTime>("DateFrom")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DateTo")
+                    b.Property<DateTime>("DateTo")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DeletedAt")
@@ -544,8 +547,6 @@ namespace AspAZ.DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("PropertyId", "CategoryId");
-
-                    b.HasIndex("CategoryId");
 
                     b.ToTable("PropertyCategory");
                 });
@@ -733,7 +734,8 @@ namespace AspAZ.DataAccess.Migrations
                     b.HasOne("AspAZ.Domain.Category", "Parent")
                         .WithMany("Children")
                         .HasForeignKey("ParentId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Parent");
                 });
@@ -826,7 +828,7 @@ namespace AspAZ.DataAccess.Migrations
                 {
                     b.HasOne("AspAZ.Domain.Category", "Category")
                         .WithMany("PropertyCategories")
-                        .HasForeignKey("CategoryId")
+                        .HasForeignKey("PropertyId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 

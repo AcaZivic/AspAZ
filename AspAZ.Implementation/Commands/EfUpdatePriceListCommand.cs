@@ -16,35 +16,37 @@ using System.Threading.Tasks;
 
 namespace AspAZ.Implementation.Commands
 {
-    public class EfUpdateGroupCommand : IUpdateGroupCommand
+    public class EfUpdatePriceListCommand : IUpdatePriceListCommand
     {
         private readonly GameKingdomContext _context;
-        private readonly GroupUpdateValidator _validator;
+        private readonly UpdatePriceListValidator _validator;
         private readonly IMapper _mapper;
 
-        public EfUpdateGroupCommand(GameKingdomContext context,GroupUpdateValidator guv, IMapper mapper)
+        public EfUpdatePriceListCommand(GameKingdomContext context, UpdatePriceListValidator guv, IMapper mapper)
         {
             _context = context;
             _validator = guv;
             _mapper = mapper;
         }
 
-        public int Id => 6;
+        public int Id => 16;
 
-        public string Name => "Updating group";
+        public string Name => "Updating price list";
 
-        public void Execute(GroupUpdateDTO data)
+        public void Execute(UpdatePriceListDTO data)
         {
-            var group = _context.GroupEmps.Find(data.Id);
+            var pl = _context.PriceLists.Find(data.Id);
 
-            if (group == null)
+            data.AddDateFrom = pl.DateFrom;
+            if (pl == null)
             {
-                throw new EntityNotFoundException(typeof(GroupEmp).ToString(), data.Id);
+                throw new EntityNotFoundException(typeof(PriceList).ToString(), data.Id);
             }
             _validator.ValidateAndThrow(data); //ValidationException
 
 
-            _mapper.Map(data, group);
+            
+            pl.DateTo = data.DateTo;
 
 
             _context.SaveChanges();

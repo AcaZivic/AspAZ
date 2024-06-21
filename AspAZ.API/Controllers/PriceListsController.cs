@@ -17,13 +17,13 @@ namespace AspAZ.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class GroupsController : ControllerBase
+    public class PriceListsController : ControllerBase
     {
         private readonly IApplicationActor _actor;
         private readonly UseCaseExecutor _executor;
         
 
-        public GroupsController(UseCaseExecutor executor, IApplicationActor actor)
+        public PriceListsController(UseCaseExecutor executor, IApplicationActor actor)
         {
             _executor = executor;
             _actor = actor;
@@ -32,8 +32,8 @@ namespace AspAZ.API.Controllers
         // GET: api/<ManufacturerController>
         [HttpGet]
         public IActionResult Get(
-            [FromQuery] GroupSearchDTO search,
-            [FromServices] IGetGroupQuery query)
+            [FromQuery] PriceListSearchDTO search,
+            [FromServices] IGetPriceListQuery query)
         {
             //var manufacturers = _gameContext.Manufacturers.ToList();
             return Ok(_executor.ExecuteQuery(query,search));
@@ -43,7 +43,7 @@ namespace AspAZ.API.Controllers
 
         // POST api/<ManufacturerController>
         [HttpPost]
-        public IActionResult Post([FromBody] GroupDTO dto, [FromServices] ICreateGroupCommand command)
+        public IActionResult Post([FromBody] CreatePriceListDTO dto, [FromServices] ICreatePriceListCommand command)
         {
 
 
@@ -56,7 +56,7 @@ namespace AspAZ.API.Controllers
 
         //// PUT api/<ManufacturerController>/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] GroupUpdateDTO dto, [FromServices] IUpdateGroupCommand command)
+        public IActionResult Put(int id, [FromBody] UpdatePriceListDTO dto, [FromServices] IUpdatePriceListCommand command)
         {
 
             dto.Id = id;
@@ -75,7 +75,7 @@ namespace AspAZ.API.Controllers
 
         //// DELETE api/<ManufacturerController>/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id, [FromServices] IDeleteGroupCommand command)
+        public IActionResult Delete(int id, [FromServices] IDeletePriceListCommand command)
         {
 
             _executor.ExecuteCommand(command, id);

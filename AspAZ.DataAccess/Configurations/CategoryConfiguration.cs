@@ -26,7 +26,7 @@ namespace AspAZ.DataAccess.Configurations
 
             builder.HasMany(x => x.PropertyCategories)
                    .WithOne(x => x.Category)
-                   .HasForeignKey(x => x.PropertyId)
+                   .HasForeignKey(x => x.CategoryId)
                    .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasMany(x=>x.Products)
