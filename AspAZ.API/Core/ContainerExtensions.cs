@@ -37,6 +37,12 @@ namespace AspAZ.API.Core
             services.AddTransient<IUpdatePriceListCommand, EfUpdatePriceListCommand>();
             services.AddTransient<IGetPriceListQuery, EfGetPriceListQuery>();
             services.AddTransient<IDeletePriceListCommand, EfDeletePriceListCommand>();
+            services.AddTransient<ICreateProductCommand, EfCreateProductCommand>();
+            services.AddTransient<IUpdateProductCommand, EfUpdateProductCommand>();
+            services.AddTransient<IDeleteProductCommand, EfDeleteProductCommand>();
+            services.AddTransient<IGetProductQuery, EfGetProductsQuery>();
+
+
 
 
 
@@ -58,6 +64,9 @@ namespace AspAZ.API.Core
             services.AddTransient<UpdateCategoryValidator>();
             services.AddTransient<PriceListValidator>();
             services.AddTransient<UpdatePriceListValidator>();
+            services.AddTransient<ProductValidator>();
+            services.AddTransient<ProductUpdateValidator>();
+            services.AddTransient<ProductProfile>();
 
 
 
@@ -66,6 +75,8 @@ namespace AspAZ.API.Core
             services.AddAutoMapper(services.GetType().Assembly);
             services.AddAutoMapper(typeof(EfGetGroupsQuery).Assembly);
             services.AddAutoMapper(typeof(EfCreatePropertyCommand).Assembly);
+            services.AddAutoMapper(typeof(EfCreateProductCommand).Assembly);
+
             //services.AddAutoMapper(typeof(EfCreatePropertyCommand).Assembly);
 
 
@@ -76,6 +87,7 @@ namespace AspAZ.API.Core
                 mc.AddProfile(new PropertyProfile());
                 mc.AddProfile(new CategoryProfile());
                 mc.AddProfile(new PriceListProfile());
+                mc.AddProfile(new ProductProfile());
 
             });
 

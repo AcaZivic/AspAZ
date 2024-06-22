@@ -1,6 +1,6 @@
 ﻿namespace AspAZ.DataTransfer
 {
-    public class CreatePriceListDTO : BaseDTO
+    public class CreatePriceListDTO 
     {
         public double Price { get; set; }
         public DateTime DateFrom { get; set; }

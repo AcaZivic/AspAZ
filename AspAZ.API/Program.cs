@@ -23,7 +23,7 @@ builder.Services.AddUseCases();
 
 builder.Services.AddTransient<IExceptionLogger, DbExceptionLogger>();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen( );
 
 
 //builder.Services.AddTransient<IApplicationActor>(x =>

@@ -39,12 +39,15 @@ namespace AspAZ.DataAccess
             var manufacturers = new List<Manufacturer> { 
                 new Manufacturer{
                     Id = 1,
-                    Name = "Asus"
+                    Name = "Asus",
+                    isActive = true,
+
                 },
                 new Manufacturer
                 {
                     Id=2,
-                    Name="Redragon"
+                    Name="Redragon",
+                    isActive = true,
                 }
             };
 

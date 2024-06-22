@@ -4,6 +4,7 @@ using AspAZ.Application.DTO;
 using AspAZ.Application.UseCases.Queries;
 using AspAZ.DataAccess;
 using AspAZ.DataTransfer;
+using AspAZ.Implementation.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,7 +44,7 @@ namespace AspAZ.Implementation.Queries
 
             var skipCount = search.PerPage * (search.Page - 1);
 
-           
+
             var reponse = new PagedResponse<ManufacturerDTO>
             {
                 CurrentPage = search.Page,
@@ -58,6 +59,8 @@ namespace AspAZ.Implementation.Queries
             };
 
             return reponse;
+
+            //return query.Paged<ManufacturerDTO, Domain.Manufacturer>(search, _mapper);
         }
     }
 }
