@@ -16,7 +16,7 @@ namespace AspAZ.DataAccess.Configurations
             builder.Property(x=>x.FirstName).HasMaxLength(50);
             builder.Property(x=>x.LastName).HasMaxLength(50);
             builder.Property(x=>x.StreetAddress).HasMaxLength(50);
-            builder.HasIndex(x => x.TaxID).IsUnique();
+            //builder.HasIndex(x => x.TaxID).IsUnique();
 
             builder.HasMany(x => x.Carts)
                    .WithOne(x => x.Customer)

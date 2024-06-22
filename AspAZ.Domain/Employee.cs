@@ -23,6 +23,6 @@ namespace AspAZ.Domain
         public virtual ICollection<UserUseCase> UseCases { get; set; } = new HashSet<UserUseCase>();
 
 
-        public virtual Employee Parent { get; set; }
+        public virtual Employee? Parent { get; set; }
     }
 }

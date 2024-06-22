@@ -45,6 +45,17 @@ namespace AspAZ.API.Core
             services.AddTransient<IUpdateRetailShopCommand, EfUpdateRetailShopCommand>();
             services.AddTransient<IDeleteRetailShopCommand, EfDeleteRetailShopCommand>();
             services.AddTransient<IGetRetailShopQuery, EfGetRetailShopQuery>();
+            services.AddTransient<ICreateCustomerCommand, EfCreateCustomerCommand>();
+            services.AddTransient<IUpdateCustomerCommand, EfUpdateCustomerCommand>();
+            services.AddTransient<IDeleteCustomerCommand, EfDeleteCustomerCommand>();
+            services.AddTransient<IGetCustomerQuery, EfGetCustomerQuery>();
+            services.AddTransient<ICreateEmployeeCommand, EfCreateEmployeeCommand>();
+            services.AddTransient<IUpdateEmployeeCommand, EfUpdateEmployeeCommand>();
+            services.AddTransient<IDeleteEmployeeCommand, EfDeleteEmployeeCommand>();
+            services.AddTransient<IGetEmployeeQuery, EfGetEmployeeQuery>();
+
+
+
 
 
 
@@ -74,7 +85,10 @@ namespace AspAZ.API.Core
             services.AddTransient<ProductUpdateValidator>();
             services.AddTransient<RetailShopValidator>();
             services.AddTransient<UpdateRetailShopValidator>();
+            services.AddTransient<CustomerValidator>();
+            services.AddTransient<EmployeeValidator>();
 
+            services.AddTransient<EmployeeUpdateValidator>();
 
 
 
@@ -98,6 +112,10 @@ namespace AspAZ.API.Core
                 mc.AddProfile(new PriceListProfile());
                 mc.AddProfile(new ProductProfile());
                 mc.AddProfile(new RetailShopProfile());
+                mc.AddProfile(new CustomerProfile());
+                mc.AddProfile(new EmployeeProfile());
+                
+
 
             });
 
