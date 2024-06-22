@@ -22,7 +22,21 @@ namespace AspAZ.Implementation.Profiles
                  Quantity = z.Quantity
              })));
 
-            CreateMap<Cart,CreateCartDto>();
+            CreateMap<Cart, CreateCartDto>();
+
+            CreateMap<UpdateCartDto, Cart>()
+             .ForMember(x => x.CustomerId, opt => opt.MapFrom(y => y.CustomerId))
+             .ForMember(x => x.EmployeeId, opt => opt.MapFrom(y => y.EmployeeId))
+             .ForMember(x => x.RetailShopId, opt => opt.MapFrom(y => y.RetailShopId));
+
+            CreateMap<Cart, CartDTO>()
+                .ForMember(x=>x.ProductCarts,y=>y.MapFrom(z=>z.ProductCarts.Select(obj => new ProductCartDto
+                {
+                    ProductId=obj.ProductId,
+                    Quantity=obj.Quantity
+                })));
+            CreateMap<CartDTO, Cart >();
+
         }
     }
 }

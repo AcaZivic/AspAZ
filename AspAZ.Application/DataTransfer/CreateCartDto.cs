@@ -27,13 +27,9 @@ namespace AspYt.Application.DTO
 
 
     }
-    //public class CategoryPropertyDto
-    //{
-    //    public int PropertyId { get; set; }
 
-    //}
-    //public class UpdateCategoryDto : CreateCategoryDto
-    //{
-    //    public int Id { get; set; }
-    //}
+    public class UpdateCartDto : CreateCartDto
+    {
+        public int Id { get; set; }
+    }
 }

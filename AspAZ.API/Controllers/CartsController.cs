@@ -33,8 +33,8 @@ namespace AspAZ.API.Controllers
         // GET: api/<CategoriesController>
         [HttpGet]
         public IActionResult Get(
-            [FromQuery] EmployeeSearchDTO search,
-            [FromServices] IGetEmployeeQuery query)
+            [FromQuery] CartSearchDTO search,
+            [FromServices] IGetCartQuery query)
         {
             //var manufacturers = _gameContext.Manufacturers.ToList();
             return Ok(_executor.ExecuteQuery(query,search));
@@ -57,7 +57,7 @@ namespace AspAZ.API.Controllers
 
         //// PUT api/<ManufacturerController>/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] UpdateEmployeeDto dto, [FromServices] IUpdateEmployeeCommand command)
+        public IActionResult Put(int id, [FromBody] UpdateCartDto dto, [FromServices] IUpdateCartCommand command)
         {
 
             dto.Id = id;
@@ -76,7 +76,7 @@ namespace AspAZ.API.Controllers
 
         //// DELETE api/<ManufacturerController>/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id, [FromServices] IDeleteEmployeeCommand command)
+        public IActionResult Delete(int id, [FromServices] IDeleteCartCommand command)
         {
 
             _executor.ExecuteCommand(command, id);

@@ -54,6 +54,9 @@ namespace AspAZ.API.Core
             services.AddTransient<IDeleteEmployeeCommand, EfDeleteEmployeeCommand>();
             services.AddTransient<IGetEmployeeQuery, EfGetEmployeeQuery>();
             services.AddTransient<ICreateCartCommand, EfCreateCartCommand>();
+            services.AddTransient<IUpdateCartCommand, EfUpdateCartCommand>();
+            services.AddTransient<IDeleteCartCommand, EfDeleteCartCommand>();
+            services.AddTransient<IGetCartQuery, EfGetCartQuery>();
 
 
 
@@ -92,6 +95,7 @@ namespace AspAZ.API.Core
             services.AddTransient<EmployeeUpdateValidator>();
             services.AddTransient<CartProductValidator>();
             services.AddTransient<CartValidator>();
+            services.AddTransient<UpdateCartValidator>();
 
 
 
