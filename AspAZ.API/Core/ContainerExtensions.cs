@@ -53,6 +53,7 @@ namespace AspAZ.API.Core
             services.AddTransient<IUpdateEmployeeCommand, EfUpdateEmployeeCommand>();
             services.AddTransient<IDeleteEmployeeCommand, EfDeleteEmployeeCommand>();
             services.AddTransient<IGetEmployeeQuery, EfGetEmployeeQuery>();
+            services.AddTransient<ICreateCartCommand, EfCreateCartCommand>();
 
 
 
@@ -89,6 +90,9 @@ namespace AspAZ.API.Core
             services.AddTransient<EmployeeValidator>();
 
             services.AddTransient<EmployeeUpdateValidator>();
+            services.AddTransient<CartProductValidator>();
+            services.AddTransient<CartValidator>();
+
 
 
 
@@ -114,7 +118,8 @@ namespace AspAZ.API.Core
                 mc.AddProfile(new RetailShopProfile());
                 mc.AddProfile(new CustomerProfile());
                 mc.AddProfile(new EmployeeProfile());
-                
+                mc.AddProfile(new CartProfile());
+
 
 
             });

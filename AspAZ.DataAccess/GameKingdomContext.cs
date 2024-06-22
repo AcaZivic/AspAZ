@@ -112,6 +112,7 @@ namespace AspAZ.DataAccess
         public DbSet<GroupEmp> GroupEmps { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<ShopStorage> ShopStorages { get; set; }
 
         public DbSet<Cart> Carts { get; set; }
         public DbSet<ErrorLog> ErrorLogs { get; set; }

@@ -18,13 +18,13 @@ namespace AspAZ.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EmployeesController : ControllerBase
+    public class CartsController : ControllerBase
     {
         private readonly IApplicationActor _actor;
         private readonly UseCaseExecutor _executor;
         
 
-        public EmployeesController(UseCaseExecutor executor, IApplicationActor actor)
+        public CartsController(UseCaseExecutor executor, IApplicationActor actor)
         {
             _executor = executor;
             _actor = actor;
@@ -44,7 +44,7 @@ namespace AspAZ.API.Controllers
 
         // POST api/<ManufacturerController>
         [HttpPost]
-        public IActionResult Post([FromBody] CreateEmployeeDto dto, [FromServices] ICreateEmployeeCommand command)
+        public IActionResult Post([FromBody] CreateCartDto dto, [FromServices] ICreateCartCommand command)
         {
 
 

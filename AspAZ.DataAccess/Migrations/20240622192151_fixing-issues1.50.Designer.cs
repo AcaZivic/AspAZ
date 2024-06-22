@@ -4,6 +4,7 @@ using AspAZ.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AspAZ.DataAccess.Migrations
 {
     [DbContext(typeof(GameKingdomContext))]
-    partial class GameKingdomContextModelSnapshot : ModelSnapshot
+    [Migration("20240622192151_fixing-issues1.50")]
+    partial class fixingissues150
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -231,7 +233,7 @@ namespace AspAZ.DataAccess.Migrations
                     b.Property<Guid>("ErrorId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
-                        .HasDefaultValue(new Guid("9d2e8abe-196d-474c-be0a-c38c826ea586"));
+                        .HasDefaultValue(new Guid("61333c88-aaa4-4106-9e92-39128edc6514"));
 
                     b.Property<string>("Message")
                         .IsRequired()
@@ -613,7 +615,7 @@ namespace AspAZ.DataAccess.Migrations
 
                     b.HasIndex("RetailShopId");
 
-                    b.ToTable("ShopStorages");
+                    b.ToTable("ShopStorage");
                 });
 
             modelBuilder.Entity("AspAZ.Domain.UseCaseLog", b =>
