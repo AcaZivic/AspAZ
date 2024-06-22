@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AspAZ.Domain
 {
-    public class ShopStorage : NamedEntity
+    public class ShopStorage 
     {
         public int RetailShopId { get; set; }
         public int ProductId { get; set; }

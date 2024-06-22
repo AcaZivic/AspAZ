@@ -41,6 +41,12 @@ namespace AspAZ.API.Core
             services.AddTransient<IUpdateProductCommand, EfUpdateProductCommand>();
             services.AddTransient<IDeleteProductCommand, EfDeleteProductCommand>();
             services.AddTransient<IGetProductQuery, EfGetProductsQuery>();
+            services.AddTransient<ICreateRetailShopCommand,EfCreateRetailShopCommand>();
+            services.AddTransient<IUpdateRetailShopCommand, EfUpdateRetailShopCommand>();
+            services.AddTransient<IDeleteRetailShopCommand, EfDeleteRetailShopCommand>();
+            services.AddTransient<IGetRetailShopQuery, EfGetRetailShopQuery>();
+
+
 
 
 
@@ -66,7 +72,10 @@ namespace AspAZ.API.Core
             services.AddTransient<UpdatePriceListValidator>();
             services.AddTransient<ProductValidator>();
             services.AddTransient<ProductUpdateValidator>();
-            services.AddTransient<ProductProfile>();
+            services.AddTransient<RetailShopValidator>();
+            services.AddTransient<UpdateRetailShopValidator>();
+
+
 
 
 
@@ -88,6 +97,7 @@ namespace AspAZ.API.Core
                 mc.AddProfile(new CategoryProfile());
                 mc.AddProfile(new PriceListProfile());
                 mc.AddProfile(new ProductProfile());
+                mc.AddProfile(new RetailShopProfile());
 
             });
 
