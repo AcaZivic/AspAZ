@@ -3,7 +3,7 @@ using AspAZ.Domain;
 
 namespace AspAZ.DataTransfer
 {
-    public class ProductDTO 
+    public class ProductDTO : BaseDTO
     {
         public string Name { get; set; }
         public string Description { get; set; }

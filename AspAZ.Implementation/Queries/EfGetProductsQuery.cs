@@ -9,6 +9,7 @@ using AutoMapper;
 using AspAZ.Application.DTO;
 using AspAZ.DataTransfer;
 using AspAZ.Application.UseCases.Queries;
+using Microsoft.EntityFrameworkCore;
 
 namespace AspAZ.Implementation.Queries
 {
@@ -30,7 +31,7 @@ namespace AspAZ.Implementation.Queries
         public PagedResponse<ProductDTO> Execute(ProductSearchDTO search)
         {
             var query = context.Products.AsQueryable();
-            var x = query.Where(x => x.Id == 3).Select(y => y.PriceList.Price).First();
+            //var x = query.Where(x => x.Id == 3).Select(y => y.PriceList.Price).First();
 
             if (search.Id != null)
             {
@@ -76,12 +77,12 @@ namespace AspAZ.Implementation.Queries
             {
                 item.Price = context.PriceLists.Find(item.PriceListId).Price;
                 item.ManufacturerName = context.Manufacturers.Find(item.ManufacturerId).Name;
-                item.CategoryName= context.Categories.Find(item.CategoryId).Name;
-                item.Properties = context.Products.Select(x => x.ProductProperties.Select(y => new ProductPropertyDTO
-                {
-                    PropertyId = y.PropertyId,
-                    Value = y.Value
-                })).First();
+                item.CategoryName = context.Categories.Find(item.CategoryId).Name;
+                item.Properties  = context.Products.Include(x => x.ProductProperties).Where(y => y.Id == item.Id).Select(obj => obj.ProductProperties.Select(f=> new ProductPropertyDTO{
+                    PropertyId = f.PropertyId,
+                    Value = f.Value
+                }
+                    )).First();
             }
 
             result.Data = temp;

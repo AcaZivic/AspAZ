@@ -13,6 +13,7 @@ namespace AspYt.Application.DTO
         public List<int>? ChildIds { get; set; }
         public List<int>? Properties { get; set; }
 
+
     }
 
 

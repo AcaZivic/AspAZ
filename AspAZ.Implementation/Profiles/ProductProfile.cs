@@ -24,7 +24,12 @@ namespace AspAZ.Implementation.Profiles
 
             CreateMap<ProductDTO, Product>();
             CreateMap<Product, ProductDTO>();
-           
+                //.ForMember(x => x, y => y.MapFrom(z => z.ProductProperties.Select(obj => new ProductPropertyDTO
+                //{
+                //    PropertyId = obj.PropertyId,
+                //    Value = obj.Value
+                //})));
+
 
 
         }

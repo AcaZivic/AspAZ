@@ -10,6 +10,7 @@ using AspAZ.Application.UseCases.Queries;
 using AspAZ.Application;
 using AspAZ.Application.UseCases.Commands;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -17,6 +18,7 @@ namespace AspAZ.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ProductsController : ControllerBase
     {
         private readonly IApplicationActor _actor;
@@ -31,6 +33,7 @@ namespace AspAZ.API.Controllers
 
         // GET: api/<ManufacturerController>
         [HttpGet]
+        [Authorize]
         public IActionResult Get(
             [FromQuery] ProductSearchDTO search,
             [FromServices] IGetProductQuery query)

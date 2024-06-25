@@ -12,6 +12,11 @@ using AspAZ.Implementation.Queries;
 using AspAZ.Application.UseCases.Commands;
 using AutoMapper;
 using AspAZ.Implementation.Profiles;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
+using System.Text;
+using AspAZ.DataAccess.Migrations;
 
 namespace AspAZ.API.Core
 {
@@ -22,7 +27,6 @@ namespace AspAZ.API.Core
            //AddTransient<ICreateGroupCommand, EfCreateGroupCommand>();
            //AddTransient<IDeleteGroupCommand, EfDeleteGroupCommand>();
            services.AddTransient<UseCaseExecutor>();
-           services.AddTransient<IApplicationActor, AdminFakeApiActor>();
             services.AddTransient<ICreateManufacturerCommand, EfCreateManufacturerCommand>();
             services.AddTransient<IGetManufacturerQuery, EfGetManufacturerQuery>();
             services.AddTransient<IDeleteManufacturerCommand, EfDeleteManufacturerCommand>();
@@ -57,6 +61,7 @@ namespace AspAZ.API.Core
             services.AddTransient<IUpdateCartCommand, EfUpdateCartCommand>();
             services.AddTransient<IDeleteCartCommand, EfDeleteCartCommand>();
             services.AddTransient<IGetCartQuery, EfGetCartQuery>();
+            services.AddTransient<JwtManager>();
 
 
 
@@ -135,7 +140,64 @@ namespace AspAZ.API.Core
 
         }
 
-    public static Guid? GetTokenId(this HttpRequest request)
+
+        public static void AddApplicationActor(this IServiceCollection services)
+        {
+            services.AddTransient<IApplicationActor>(x =>
+            {
+                var accessor = x.GetService<IHttpContextAccessor>();
+
+
+                 var user = accessor.HttpContext.User;
+
+                if (user.FindFirst("ActorData") == null)
+                {
+                    return new AnonymousActor();
+                }
+
+                var actorString = user.FindFirst("ActorData").Value;
+
+                var actor = JsonConvert.DeserializeObject<JwtActor>(actorString);
+
+                return actor;
+
+            });
+        }
+        //, AppSettings appSettings
+        public static void AddJwt(this IServiceCollection services)
+        {
+            services.AddTransient<JwtManager>(x =>
+            {
+                var context = x.GetService<GameKingdomContext>();
+
+                //appSettings.JwtIssuer, appSettings.JwtSecretKey
+                return new JwtManager(context);
+            });
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultSignInScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(cfg =>
+            {
+                cfg.RequireHttpsMetadata = false;
+                cfg.SaveToken = true;
+                cfg.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidIssuer = "asp_api",
+                    ValidateIssuer = true,
+                    ValidAudience = "Any",
+                    ValidateAudience = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("asp123"+ "potrebnoRadiRadaTokena-velicina-mora-biti-veca-od-256-bita")),
+                    ValidateIssuerSigningKey = true,
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.Zero
+                };
+            });
+        }
+
+        public static Guid? GetTokenId(this HttpRequest request)
         {
             if (request == null || !request.Headers.ContainsKey("Authorization"))
             {
