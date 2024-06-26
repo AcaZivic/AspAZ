@@ -9,6 +9,7 @@ using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http;
+using AspAZ.Implementation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,22 +37,56 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddTransient<GameKingdomContext>();
-builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+//builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
+
+builder.Services.AddTransient<GameKingdomContext>();
 builder.Services.AddHttpContextAccessor();
 
+//builder.Services.AddTransient<IApplicationActor, AdminFakeApiActor>();
+
+builder.Services.AddTransient<IApplicationActorProvider>(x =>
+{
+    //    //var accessor = x.GetService<IHttpContextAccessor>();
+    //    //var user = accessor.HttpContext.User;
+
+
+    //    //if(user.FindFirst("ActorData")==null)
+    //    //{
+    //    //    throw new Exception("Greska");
+    //    //}
+
+    //    //var actorString = user.FindFirst("ActorData").Value;
+    //    //var actor = JsonConvert.DeserializeObject<JwtActor>(actorString);
+
+    //    //return actor;
+
+    var accessor = x.GetService<IHttpContextAccessor>();
+
+    var request = accessor.HttpContext.Request;
+
+    var authHeader = request.Headers.Authorization.ToString();
+
+    var context = x.GetService<GameKingdomContext>();
+
+    return new JWTprovider(authHeader);
+});
+
+builder.Services.AddTransient<IApplicationActor>(x =>
+{
+    var accessor = x.GetService<IHttpContextAccessor>();
+    if (accessor.HttpContext == null)
+    {
+        return new UnauthorizedActor();
+    }
+
+    return x.GetService<IApplicationActorProvider>().GetActor();
+});
+
 builder.Services.AddAutoMapper(builder.GetType().Assembly);
-
-
-
 builder.Services.AddUseCases();
-builder.Services.AddTransient<IApplicationActor, AdminFakeApiActor>();
-
 builder.Services.AddTransient<IExceptionLogger, DbExceptionLogger>();
 builder.Services.AddEndpointsApiExplorer();
-
-
 
 //builder.Services.AddApplicationActor();
 

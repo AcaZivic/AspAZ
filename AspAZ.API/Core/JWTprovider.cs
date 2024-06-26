@@ -1,4 +1,5 @@
-﻿using AspAZ.Application;
+﻿using AspAZ.Api.Core;
+using AspAZ.Application;
 using AspAZ.Implementation;
 using Newtonsoft.Json;
 using System.IdentityModel.Tokens.Jwt;
@@ -33,15 +34,16 @@ namespace AspAZ.API.Core
 
             var claim = claims.First(x => x.Type == "jti").Value;
 
-            var actor = new Actor
-            {
-                Email = claims.First(x => x.Type == "Username").Value,
-                Username = claims.First(x => x.Type == "Username").Value,
-                FirstName = claims.First(x => x.Type == "FirstName").Value,
-                LastName = claims.First(x => x.Type == "LastName").Value,
-                Id = int.Parse(claims.First(x => x.Type == "Id").Value),
-                AllowedUseCases = JsonConvert.DeserializeObject<List<int>>(claims.First(x => x.Type == "UseCaseIds").Value)
-            };
+            var data = claims.Where(x => x.Type == "ActorData").FirstOrDefault().Value;
+            var actor = JsonConvert.DeserializeObject<JwtActor>(data);
+
+
+            //var actor = new Actor
+            //{
+            //    Username = claims.First(x => x.Type == "Username").Value,
+            //    Id = int.Parse(claims.First(x => x.Type == "Id").Value),
+            //    AllowedUseCases = JsonConvert.DeserializeObject<List<int>>(claims.First(x => x.Type == "UseCaseIds").Value)
+            //};
 
             return actor;
         }

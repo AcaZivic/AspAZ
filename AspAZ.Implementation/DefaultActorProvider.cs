@@ -14,10 +14,7 @@ namespace AspAZ.Implementation
             return new Actor
             {
                 Username = "test",
-                Email = "test",
                 Id = 0,
-                FirstName = "Test",
-                LastName = "Test"
             };
         }
     }

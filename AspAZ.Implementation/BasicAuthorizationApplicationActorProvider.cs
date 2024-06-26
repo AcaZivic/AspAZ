@@ -23,7 +23,6 @@ namespace AspAZ.Implementation
 
         public IApplicationActor GetActor()
         {
-            //Primer header-a "Basic cGVyYTpsb3ppbmthMTIz"
             if (_authorizationHeader == null || !_authorizationHeader.Contains("Basic"))
             {
                 return new UnauthorizedActor();
@@ -31,7 +30,7 @@ namespace AspAZ.Implementation
 
             var base64Data = _authorizationHeader.Split(" ")[1];
 
-            //Primer base64Data - cGVyYTpsb3ppbmthMTIz
+
 
             var bytes = Convert.FromBase64String(base64Data);
 
@@ -57,10 +56,7 @@ namespace AspAZ.Implementation
 
             return new Actor
             {
-                Email = e.Email,
-                FirstName = e.FirstName,
                 Id = e.Id,
-                LastName = e.LastName,
                 Username = e.Username,
                 AllowedUseCases = useCases
             };

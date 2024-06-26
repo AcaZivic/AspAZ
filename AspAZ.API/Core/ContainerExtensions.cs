@@ -141,28 +141,28 @@ namespace AspAZ.API.Core
         }
 
 
-        public static void AddApplicationActor(this IServiceCollection services)
-        {
-            services.AddTransient<IApplicationActor>(x =>
-            {
-                var accessor = x.GetService<IHttpContextAccessor>();
+        //public static void AddApplicationActor(this IServiceCollection services)
+        //{
+        //    services.AddTransient<IApplicationActor>(x =>
+        //    {
+        //        var accessor = x.GetService<IHttpContextAccessor>();
 
 
-                 var user = accessor.HttpContext.User;
+        //         var user = accessor.HttpContext.User;
 
-                if (user.FindFirst("ActorData") == null)
-                {
-                    return new AnonymousActor();
-                }
+        //        if (user.FindFirst("ActorData") == null)
+        //        {
+        //            return new AnonymousActor();
+        //        }
 
-                var actorString = user.FindFirst("ActorData").Value;
+        //        var actorString = user.FindFirst("ActorData").Value;
 
-                var actor = JsonConvert.DeserializeObject<JwtActor>(actorString);
+        //        var actor = JsonConvert.DeserializeObject<JwtActor>(actorString);
 
-                return actor;
+        //        return actor;
 
-            });
-        }
+        //    });
+        //}
         //, AppSettings appSettings
         public static void AddJwt(this IServiceCollection services)
         {

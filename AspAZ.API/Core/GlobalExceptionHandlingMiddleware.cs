@@ -31,9 +31,25 @@ namespace AspAZ.API.Core
                 if (exception is UnauthorizedAccessException)
                 {
                     httpContext.Response.StatusCode = 401;
+
+
                     return;
                 }
+                
 
+                if (exception is UnauthorizedUseCaseException  usE)
+                {
+                    httpContext.Response.StatusCode = 401;
+
+                    var body = new
+                    {
+                        message = usE.Message
+                    };
+
+                    await httpContext.Response.WriteAsJsonAsync(body);
+                    return;
+                }
+                
                 if (exception is ValidationException ex)
                 {
                     httpContext.Response.StatusCode = 422;

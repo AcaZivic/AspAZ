@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AspAZ.Api.Core;
+using AspAZ.Application;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -23,12 +24,11 @@ namespace AspAZ.API.Controllers
 
         // POST api/<TokenController>
         [HttpPost]
-        //[FromBody] request.Username, request.Password
-        //LoginRequest request
-        public IActionResult Post()
+        
+        public IActionResult Post([FromBody] LoginRequest request)
         {
             //request.Username, request.Password
-            var token = manager.MakeToken();
+            var token = manager.MakeToken(request.Username, request.Password);
 
             if(token == null)
             {
