@@ -24,7 +24,7 @@ namespace AspAZ.Implementation.Queries
             _mapper = mapper;
         }
 
-        public int Id => 111;
+        public int Id => 66;
 
         public string Name => "Product search.";
 

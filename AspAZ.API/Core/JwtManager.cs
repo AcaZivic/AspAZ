@@ -26,7 +26,7 @@ namespace AspAZ.Api.Core
             //_secretKey = secretKey;
         }
 
-        public string MakeToken(string username= "drmex003", string password= "Jovic03zarko.")
+        public string MakeToken(string username, string password)
         {
             var user = _context.Employees.Include(u => u.UseCases)
                 .FirstOrDefault(x => x.Username == username && x.Password == password);
