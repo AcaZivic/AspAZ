@@ -47,19 +47,6 @@ builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddTransient<IApplicationActorProvider>(x =>
 {
-    //    //var accessor = x.GetService<IHttpContextAccessor>();
-    //    //var user = accessor.HttpContext.User;
-
-
-    //    //if(user.FindFirst("ActorData")==null)
-    //    //{
-    //    //    throw new Exception("Greska");
-    //    //}
-
-    //    //var actorString = user.FindFirst("ActorData").Value;
-    //    //var actor = JsonConvert.DeserializeObject<JwtActor>(actorString);
-
-    //    //return actor;
 
     var accessor = x.GetService<IHttpContextAccessor>();
 
@@ -88,6 +75,7 @@ builder.Services.AddUseCases();
 builder.Services.AddTransient<IExceptionLogger, DbExceptionLogger>();
 builder.Services.AddEndpointsApiExplorer();
 
+
 //builder.Services.AddApplicationActor();
 
 
@@ -98,6 +86,7 @@ builder.Services.AddJwt();
 
 var app = builder.Build();
 app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
+app.UseStaticFiles();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
