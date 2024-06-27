@@ -17,6 +17,8 @@ using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using System.Text;
 using AspAZ.DataAccess.Migrations;
+using AspAZ.Application.Email;
+using AspAZ.Implementation.Email;
 
 namespace AspAZ.API.Core
 {
@@ -62,6 +64,9 @@ namespace AspAZ.API.Core
             services.AddTransient<IDeleteCartCommand, EfDeleteCartCommand>();
             services.AddTransient<IGetCartQuery, EfGetCartQuery>();
             services.AddTransient<JwtManager>();
+
+            services.AddTransient<IEmailSender, SmtpEmailSender>();
+
 
 
 

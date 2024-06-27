@@ -25,6 +25,6 @@ namespace AspAZ.Implementation
 
 
 
-        public IEnumerable<int> AllowedUseCases => new List<int> { 2 };
+        public IEnumerable<int> AllowedUseCases => new List<int> { 1 };
     }
 }

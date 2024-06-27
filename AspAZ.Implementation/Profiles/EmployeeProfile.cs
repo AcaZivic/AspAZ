@@ -12,30 +12,11 @@ namespace AspAZ.Implementation.Profiles
     {
         public EmployeeProfile()
         {
-            //        CreateMap<UpdateCategoryDto, Category>().
-            //            ForMember(x => x.Name,
-            //            y => y.MapFrom(z => z.Name));
-            //        CreateMap<UpdateCategoryDto, Category>().
-            //            ForMember(x => x.Description,
-            //            y => y.MapFrom(z => z.Description));
-            //         CreateMap<UpdateCategoryDto, Category>().
-            //            ForMember(x => x.ParentId,
-            //            y => y.MapFrom(z => z.ParentId));
 
-
-
-            //        CreateMap<Category,CategoryDto>().ForMember(x=>x.Name,
-            //            y=>y.MapFrom(z => z.Name));
-            //        CreateMap< Category, CategoryDto>().ForMember(x => x.Description,
-            //y => y.MapFrom(z => z.Description));
-            //        //CreateMap<Category, CategoryDto>().ForMember(x => x.Children,
-            //        //    y => y.MapFrom(z => z.Children.Select(c=> new CategoryDto
-            //        //    {
-            //        //        Id = c.Id,
-            //        //        Name = c.Name,
-            //        //        Description = c.Description
-            //        //    })));
-            CreateMap<CreateEmployeeDto, Employee>();
+            CreateMap<CreateEmployeeDto, Employee>().ForMember(x=>x.UseCases,y=>y.MapFrom(obj=>obj.UseCases.Select(u=>new UserUseCase
+            {
+                UseCaseId = u
+            })));
             CreateMap<Employee, CreateEmployeeDto >();
             CreateMap<UpdateEmployeeDto, Employee>();
             CreateMap<Employee, UpdateEmployeeDto>();
